@@ -76,3 +76,22 @@
         * metrics and health checks
         * externalized configuration
 
+
+### Difference Between Spring Framework VS Spring MVC vs Spring Boot
+* Spring Framework
+  * Most important feature of Spring Framework is Dependency Injection. At the code of all Spring Modules is Dependency Injection or IOC Inversion of Control
+  * Resolves Duplication / Plumbing code
+  * Providing good integration with other Frameworks
+* Spring MVC
+  * Provides decoupled way of developing web applications. With simple like Dispatcher Servlet, ModelAndView and View Resolver, it makes it easy to develop web applications.
+* Spring Boot
+  * One of the main advantages of Spring-boot is auto configuration. With SB we can quickly run a WebApplication with minimum effort and configuration.
+  * Usage of starters
+  * Monitoring feratures - actuator
+  * Logging
+  * etc...
+
+
+### Spring AOP (Aspect Oriented Programming)
+* Used to intercept any call to the beans
+* spring-aop and aspectj

@@ -1,0 +1,6 @@
+# logging.level.org.springframework=DEBUG
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
