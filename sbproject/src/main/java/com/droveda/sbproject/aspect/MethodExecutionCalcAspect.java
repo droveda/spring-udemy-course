@@ -15,18 +15,17 @@ public class MethodExecutionCalcAspect {
 
     //@Around("execution(* com.droveda.sbproject.service.*.*(..))")
     @Around("com.droveda.sbproject.aspect.CommonJoinPointConfig.trackTimeAnnotation()")
-    public void around(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
+    public Object around(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
         //start time
         //allow execution
         //end time
         //difference end - start
 
         long start = System.currentTimeMillis();
-        proceedingJoinPoint.proceed();
+        Object ret = proceedingJoinPoint.proceed();
         long timeTaken = System.currentTimeMillis() - start;
-
-
         LOG.info("Time taken by this {} is {}", proceedingJoinPoint, timeTaken);
+        return ret;
     }
 
 
