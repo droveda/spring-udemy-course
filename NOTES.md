@@ -12,7 +12,7 @@
 
 * The control of creating a dependency is delegated to Spring, instead of creating it  
   on the same class that needs the dependency
-* IoC is implemented and the act of connecting objects with other objects or injecting objects into objects is done by
+* IoC is implemented and the act of connecting objects with other objects or injecting objects into objects is done by the
   container rather than by the object themselves.
 * This helps on having a loosely coupled code
 * Instead of
