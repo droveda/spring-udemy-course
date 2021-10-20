@@ -95,3 +95,7 @@
 ### Spring AOP (Aspect Oriented Programming)
 * Used to intercept any call to the beans
 * spring-aop and aspectj
+
+
+## Simple WebApp
+* mvn tomcat7:run
