@@ -65,14 +65,14 @@
         * externalized configuration
 * What spring boot is not
     * Zero code generation
-    * Neither am application server nor a web server
+    * Neither an application server nor a web server
 * Features
     * Quickly create spring applications
     * Embedded Servers - Tomcat, Jetty or Undertow
     * Quick Start Projects
         * Web
         * JPA
-    * Production-=ready features
+    * Production-ready features
         * metrics and health checks
         * externalized configuration
 
