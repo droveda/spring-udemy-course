@@ -7,6 +7,14 @@
     * @Inject (@Autowired)
     * @Named (@Component & @Qualifier)
     * @Singleton (Defines a scope of Singleton)
+* Dependency for Java EE CDI
+ ``` 
+        <dependency>
+            <groupId>javax.inject</groupId>
+            <artifactId>javax.inject</artifactId>
+            <version>1</version>
+        </dependency>
+  ```
 
 ## IOC (Inversion of Control) - IOC Container
 
@@ -35,24 +43,39 @@
     }
   ```
 
-### Application Context - 99 percent of the scenarios
+### Application Context - 99 percent of the scenarios (it provides more features than the Bean Factory)
 
 * Bean Factory ++
     * Spring's AOP features
     * i18n capabilities
     * WebApplicationContext for web applications etc
 
-### Bean Factory
+### Bean Factory (it is good for IOT devices because it uses less memory and CPU than Application Context)
 
 * Basic management of the beans
 * Wiring of the dependencies
 
-### Component Annotations
+### Component Annotations (Stereotypes)
 
 * @Component - Generic Component
 * @Repository - encapsulation storage, retrieval and search behaviour typically from a relational database
 * @Service - Business Service Facade
 * @Controller - Controller in MVC pattern
+
+### Bean Scope
+
+Default - singleton  
+* singleton - One instance per Spring Context
+* prototype - New bean whenever requested
+  * @Scope("prototype")
+  * @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
+  * @Scope(value = ConfigurableBeanFactory.SCOPE_PROTOTYPE, proxyMode = ScopedProxyMode.TARGET_CLASS) (ver exemplo JDBCConnection.java)
+* request - One bean per HTTP request
+* session - One bean per HTTP session
+
+### Component Scan
+@ComponentScan - By default it will search for beans in the same package and subpackages in where the class with @SpringBootApplication annotation is
+* @ComponentScan("com.droveda.componentscan") - example if you want to scan for beans in another directory
 
 ## Spring Boot
 
