@@ -52,3 +52,8 @@ see project **aop-demo**
   * 2. Method throws an exception
 * @AfterReturning - Do something ONLY when a method executes successfully
 * @AfterThrowing - Do something ONLY when a method throws an exception
+
+
+## Docker
+docker build -f docker/Dockerfile -t droveda/myrestapi:v01 .  
+docker build -f docker/Dockerfile2 -t droveda/myrestapi:v02 .  
