@@ -87,3 +87,5 @@ Similar to MavenGrade in Java World
 * Used for things that remain a constant during lifetime of a component
   * Example increment value of a specifc component
   
+
+### React Developer Tools - Chrome Extension
