@@ -29,7 +29,7 @@ public class HelloWorldController {
         return ResponseEntity.ok(new HelloWorldBean("Hello!!!"));
     }
 
-    @GetMapping("/hello/{name}")
+    @GetMapping("/hello-world/path-variable/{name}")
     public ResponseEntity<HelloWorldBean> helloBean2(@PathVariable("name") String name) {
         var message = "Hello " + name;
         return ResponseEntity.ok(new HelloWorldBean(message));

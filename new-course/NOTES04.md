@@ -24,6 +24,8 @@ Similar to MavenGrade in Java World
 
 
 ### Creating a React Project
+https://create-react-app.dev/docs/getting-started/  
+
 * React: One of the most popular JavaScript libraries to build SPA (Single Page Applications)
   * Alternatives: Angular, VueJS
 * Create React App
@@ -89,3 +91,89 @@ Similar to MavenGrade in Java World
   
 
 ### React Developer Tools - Chrome Extension
+very useful tool to see the react components and state and for debugging  
+
+
+## Routing in React
+* npm install react-router-dom
+
+```
+import { BrowserRouter, Link, Route, Routes, useNavigate, useParams } from 'react-router-dom';
+
+export default function TodoApp() {
+    return (
+        <div className="TodoApp">
+
+            <BrowserRouter>
+                <Routes>
+                    <Route path="/" element={<LoginComponent />} />
+                    <Route path="/login" element={<LoginComponent />} />
+                    <Route path="/welcome" element={<WelcomoeComponent />} />
+                </Routes>
+            </BrowserRouter>
+        </div>
+    )
+}
+
+
+const navigate = useNavigate()
+navigate('/welcome')
+
+
+<p>
+    Your todos - <Link to='/todos'>Go Here</Link>
+</p>
+
+
+```
+
+## Adding bootstrap
+* npm install bootstrap
+* index.js add
+  * import 'bootstrap/dist/css/bootstrap.min.css'
+
+
+## Sharing React State with multiple components using AuthContext
+
+Example -> AuthContext.js file  
+```
+import { createContext, useState } from "react";
+
+export const AuthContext = createContext();
+
+
+//Share the created context with other components
+
+export default function AuthProvider({ children }) {
+
+    //Put some state in the context
+    const [number, setNumver] = useState(10)
+
+    return (
+        <AuthContext.Provider value={{ number }}>
+           {children}
+        </AuthContext.Provider>
+    );
+}
+```
+
+## Calling Rest APIs
+//axios  
+npm install axios  
+
+* Enabling CORS on spring-boot app
+```
+@Bean
+public WebMvcConfigurer corsConfigurer() {
+    return new WebMvcConfigurer() {
+        @Override
+        public void addCorsMappings(CorsRegistry registry) {
+
+            registry.addMapping("/**")
+                    .allowedMethods("*")
+                    .allowedOrigins("http://localhost:3000");
+
+        }
+    };
+}
+```

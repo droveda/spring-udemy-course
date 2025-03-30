@@ -17,7 +17,9 @@ public class AppSecurityConfig {
         // * CSRF -> POST, PUT
 
         http.authorizeHttpRequests(
-                auth -> auth.anyRequest().authenticated()
+                auth -> auth
+                        .requestMatchers("/hello", "/hello-bean").permitAll() // Public routes
+                        .anyRequest().authenticated() // All other routes are protected
         );
 
         http.httpBasic(Customizer.withDefaults());
