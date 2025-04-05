@@ -177,3 +177,34 @@ public WebMvcConfigurer corsConfigurer() {
     };
 }
 ```
+
+## Install the following libraries
+* npm install formik
+* npm install moment
+
+
+## Working With JWT
+
+```
+<dependency>
+  <groupId>org.springframework.boot</groupId>
+  <artifactId>spring-boot-starter-oauth2-resource-server</artifactId>
+</dependency>
+
+<dependency>
+  <groupId>org.springframework.boot</groupId>
+  <artifactId>spring-boot-configuration-processor</artifactId>
+</dependency>
+```
+
+POST http://localhost:8080/authenticate  
+body: {"username": "Mike", "password": "dummy"}  
+you will get the token as response 
+add header "Authorization": "Bearer {the-token}"  
+
+```
+classes see:
+src/main/java/com/droveda/myrestapi/config/JwtSecurityConfig.java
+src/main/java/com/droveda/myrestapi/controller/JwtAuthenticationController.java
+src/main/java/com/droveda/myrestapi/service/JwtTokenService.java
+```

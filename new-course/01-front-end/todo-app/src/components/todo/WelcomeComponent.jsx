@@ -1,22 +1,24 @@
-import axios from 'axios';
 import { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
+import { retrieveHelloWorldPathVariable } from './api/HelloWorldApiService';
+import { useAuth } from './security/AuthContext';
 
 export default function WelcomeComponent() {
 
     const { username } = useParams()
+    const authContext = useAuth()
 
     const [message, setMessage] = useState(null)
 
     function callHelloWorld() {
         console.log('called')
 
-        // axios.get('http://localhost:8080/hello')
+        // retrieveHelloWorldBean()
         //     .then((response) => success(response))
         //     .catch((error) => errorResponse(error))
         //     .finally(() => console.log('cleanup')) // optional
 
-        axios.get('http://localhost:8080/hello-bean')
+        retrieveHelloWorldPathVariable('DRoveda', authContext.token)
             .then((response) => success(response))
             .catch((error) => errorResponse(error))
             .finally(() => console.log('cleanup')) // optional
