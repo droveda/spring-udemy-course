@@ -111,3 +111,151 @@ public WebMvcConfigurer corsConfigurer() {
 * Database
 * LDAP - Lightweight Directory Access Protocol
   * Open protocol for directory services and authentication
+
+
+### Working with spring-security and database
+* org.springframework.security.core.userdetails.jdbc.JdbcDaoImpl  
+* org/springframework/security/core/userdetails/jdbc/users.ddl
+
+```
+@Bean
+public DataSource dataSource() {
+    return new EmbeddedDatabaseBuilder()
+            .setType(EmbeddedDatabaseType.H2)
+            .addScript(org.springframework.security.core.userdetails.jdbc.JdbcDaoImpl.DEFAULT_USER_SCHEMA_DDL_LOCATION)
+            .build();
+}
+
+
+@Bean
+public UserDetailsService userDetailsService(DataSource dataSource) {
+
+    var user = User.withUsername("in28minutes")
+            .password("{noop}dummy")
+            .roles("USER").build();
+
+    var admin = User.withUsername("admin")
+            .password("{noop}dummy")
+            .roles("ADMIN").build();
+
+
+    var jdbcManager = new JdbcUserDetailsManager(dataSource);
+
+    jdbcManager.createUser(user);
+    jdbcManager.createUser(admin);
+
+    return jdbcManager;
+}
+```
+
+
+
+### Storing Passwords
+NOTE: Difference between encoding, hashing and Encryption   
+* Hashes like SHA-256 are no longer secure
+* Modern systems can perform billions of hash calculations a second
+  * AND systems improve with time!
+* Recommended: Use adaptive one way functions with Work factor of 1 second
+  * It should take at least 1 second to verify a password on your system
+  * Examples: bcrypt, scrypt, argon2, ...
+* PasswordEncoder - interface for performing one way transformation of a password
+  * (REMEMBER) Confusingly Named!
+  * BCryptPasswordEncoder
+
+### Getting Started With JWT
+* Open indeustry standard for representing claims securely between two parties
+* Can Contain User Details and Autorizations
+* Structure:
+  * header
+    * type JWT
+    * Hashing Algo
+  * Payload
+    * iss
+    * sub
+    * aud
+    * exp
+    * iat
+    * custom claims
+  * Signature
+    * Includes a secret
+
+Symmetric Encryption  
+Assymetric Key Encryption  
+
+1. Create a JWT
+   1. needs
+      1. user credentials
+      2. user data (payload)
+      3. RSA key pair
+2. Send JWT as poart of request header
+   1. Authorization Header
+   2. Bearer Token
+3. JWT is verified
+   1. Needs Decoding
+   2. RSA key pair (PUblic Key)
+
+
+### JWT Authentication using Spring boot's Oauth2 Resource Server
+1. Generate Key Pair
+   1. Will use java.security.KeyPairGenerator
+   2. You can use openssl as well
+2. Create RSA Key object using Key Pair
+   1. com.ninbus.jose.jwk.RSAKey
+3. Create JWKSource (JSON Web Key source)
+   1. Create JWKSet (a new JSON Web Key Set) with the RSA Key
+   2. Create JWKSource using JWKSet
+4. Use RSA Public Key for Decoding
+   1. NimbusJwtDecoder.withPublicKey(rsaKey().toRSAPublicKey()).build()
+5. Use JWKSource for Encoding
+   1. return new NimbusJwtEncoder(jwkSource());
+
+
+see file: com.droveda.springsecuritylab.config.JwtSecurityConfiguration  
+
+
+### Understanding Spring Security Authentication
+* Authentication is done as part of the Spring Security Filter Chain!
+* **1 AuthenticationManager** - Responsible for authentication
+  * Can interact with multiple authentication providers
+* **2 Authentication Provider** - Perform specific authentication type
+  * JWTAuthenticationProvider - JWT Authentication
+* **3 UserDetailsService** - Core interface to load user data
+* How is authentication result stored?
+  * SecurityContextHolder -> SecurityContext -> Authentication -> GrantedAuthority
+    * Authentication - (After authentication) Holds user (Principal) details
+    * GrantedAuthority - An authority granted to principal (roles, scopes, ...)
+
+
+### Spting Security Authorization
+1. Global Security: authorizeHttpRequests
+   1. .requestMatchers("/users").hasRole("USER")
+      1. hasRole, hasAuthority, hasAnyAuthority, isAuthenticated
+2. Method Security (@EnableMethodSecurity)
+   1. **@Pre** and **@Post** Annotations
+      1. @PreAuthorize("hadTole('USER') and #username == authentication.name")
+      2. @PostAuthorize("returnObject.username == 'in29minutes'")
+   2. JSR-250 annotations
+      1. @EnableMethodSecurity(jsr250Enabled=true)
+      2. @RolesAllowed({"ADMIN","USER"})
+   3. @Secured annotation
+      1. @EnableMethodSecurity(securedEnabled=true)
+      2. @Secured({"ROLE_ADMIN","ROLE_USER"})
+
+
+### Oauth
+* Resource owner
+* Client application
+* Resource Server
+* Authorization Server
+
+```
+##Google API console
+##http://localhost:8080/login/oauth2/code/google
+ 
+spring.security.oauth2.client.registration.google.client-id=YOUR_CLIENT_ID
+spring.security.oauth2.client.registration.google.client-secret=YOUR_SECRET
+
+Dependencies: 
+Spring Web
+Oauth Client
+```
