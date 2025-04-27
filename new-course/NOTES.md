@@ -32,21 +32,21 @@ var game = new MarioGame();
 3. ``` context.getBean("name"); ``` to get the Bean
 
 What is the purpose of the @Configuration annotation in a Spring application?  
-It marks a class as a source of bean definitions, allowing the Spring container to manage the Beans defined withon it.  
+It marks a class as a source of bean definitions, allowing the Spring container to manage the Beans defined with on it.  
 
 
 ## What is Spring Container AKA Spring Context AKA Spring IOC Container?
 * Spring Container: Manages Spring beans & their lifecycle
 * There are two types:
 * 1 - **Bean Factory**: Basic Spring Container
-* 2 - **Application Comtext**: Advanced Spring Container with enterprise-specific features (It is the one more frequently used)
+* 2 - **Application Context**: Advanced Spring Container with enterprise-specific features (It is the one more frequently used)
   * Easy to use in web applications
   * Easy internationalization
   * Easy integration with Spring AOP
 * Which one to use? Most enterprise applications use Application Context
   * Recommended for web applications, web services - REST API and microservices
 
-### Difference between POJO, JAVA Beand and Spring Bean
+### Difference between POJO, JAVA Bean and Spring Bean
 * POJO -> Plain old java object - Any java class, any java object is a POJO
 * Java Bean -> EJB (Enterprise Java Bean) - An old pattern (needs a default no args constructor, should have getters and setters, should Implements Serializable)
 * Spring Bean -> Anything managed by spring, any java object managed by Spring
@@ -66,6 +66,11 @@ It marks a class as a source of bean definitions, allowing the Spring container 
 * However, you can configura beans to be lazily initialized using Lazy annotation
   * NOT recommended (AND) not frequently used
 
+application.properties  
+```
+spring.main.lazy-initialization=true
+```
+
 ### Spring Bean Scopes
 * Spring Beans are defined to be used in a specifc scope:
   * Singleton -> One object instance per Spring IoC Container (Singleton is the default and very frequently used)
@@ -82,10 +87,10 @@ It marks a class as a source of bean definitions, allowing the Spring container 
   * Java Singleton (GOF): One object instance per JVM
 
 
-### Evolution of Jakarta EE vc J2EE vs Java EE
+### Evolution of Jakarta EE vs J2EE vs Java EE
 J2EE (1.2, 1.3, 1.4) -> Java EE (5 to 8) -> Jakarta EE  
 
-* Enterprise capabilities were initially built inti JDK
+* Enterprise capabilities were initially built into the JDK
 * With time, they were separated out:
   * J2EE - Java 2 Platform Enterprise Edition
     * Servlets
@@ -102,7 +107,7 @@ J2EE (1.2, 1.3, 1.4) -> Java EE (5 to 8) -> Jakarta EE
       * Jakarta Contexts and Dependency Injection (CDI)
       * Jakarta Persistence (JPA)
     * Supported by Spring 6 and Spring Boot 3
-      * That's why we use jakarta. packages (instead of javax.)
+      * That's **why we use JAKARTA**. packages (instead of javax.)
 
 ### Jakarta Contexts & Dependency Injection (CDI)
 * Spring Framework V1 was released in 2004
@@ -141,7 +146,7 @@ J2EE (1.2, 1.3, 1.4) -> Java EE (5 to 8) -> Jakarta EE
   * CORE
   * Spring MVC
   * Spring WebFlux -> Reactive
-  * Data Access -> JDBC, JPA< etc...
+  * Data Access -> JDBC, JPA, etc...
   * Integration: JMS, etc...
   * Testing -> Mock objects, spring mvc test, etc...
 

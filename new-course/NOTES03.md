@@ -1,12 +1,12 @@
 # Learning Spring AOP with Spring-boot
 
 * What is AOP
-  * A layered approach is typcally used to build applications
+  * A layered approach is typically used to build applications
     * web layer
     * business layer
     * Data layer
 * Each layer has differente responsibilites
-  * howerver there are a few common aspacts that apply yo all layers
+  * howerver there are a few common aspacts that apply to all layers
     * Security
     * Performance
     * Logging

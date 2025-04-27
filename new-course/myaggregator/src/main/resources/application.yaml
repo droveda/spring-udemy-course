@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: myaggregator
+
+server:
+  port: 8081
+
+users-service:
+  url: http://localhost:8082/my-service

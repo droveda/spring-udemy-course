@@ -15,7 +15,7 @@ JavaScript is implementation
 
 ## npm
 Package management for JavaScript  
-Similar to MavenGrade in Java World  
+Similar to Maven/Gradle in Java World  
 * ```npm init``` (this will create a node project)
 * ```package.json``` file is similar to pom.xml file
 * ```npm install jquery```
@@ -51,11 +51,11 @@ https://create-react-app.dev/docs/getting-started/
 ### React Folder Structure
 * package.json -> dependencies
 * node_modules -> Folder where all the dependencies are downloaded to
-* publicindexhtml -> Contains root dev
+* public/indexhtml -> Contains root dev
 * src/index.js -> initializes React App. Loads app component
 * src/App.js -> Code for App Component
-  * src/App.cdd -> Styling for App component
-  * src/App.test/js -> unit tests for App component
+  * src/App.css -> Styling for App component
+  * src/App.test.js -> unit tests for App component
 
 
 ### Understanding React Components

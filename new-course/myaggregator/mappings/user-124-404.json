@@ -1,0 +1,12 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "/my-service/users/124"
+  },
+  "response": {
+    "status": 404,
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  }
+}

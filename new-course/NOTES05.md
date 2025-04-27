@@ -4,12 +4,12 @@
 * Authentication, what do you remember + what you possess
   * userid/password  
   * biometrics
-* Ahtorinzation (do they have the right access)
+* Authorization (do they have the right access)
   * User ABC can read data and update data
   * User XYZ can only read data
 
 Principles of secure systems  
-* Trust Nothibng
+* Trust Nothing
 * Assign Least Privilegies
 * Have complete Mediation
   * Medieval Fort's
@@ -36,7 +36,7 @@ Reques -> Spring Security -> Dispather Servlet -> Controller(s)
 
 
 ### Default Spring Security Configuration
-* Everything is autehticated
+* Everything is authenticated
   * You can customize it further
 * **Form authentication** is enabled (with default form and logout features)
 * **Basic authentication** is enabled
@@ -81,8 +81,8 @@ How can you protect from CSRF?
     * server.servlet.session.cookie.same-site=strict
 * NOTE: If your REST API is stateless CSRF token is not applicable
 
-org.springframework.boot.autoconfigure.security.servlet.SpringBootWebSecurityConfiguration  
-the class above is the default config applied by default  
+```org.springframework.boot.autoconfigure.security.servlet.SpringBootWebSecurityConfiguration```    
+the class above is the default config applied   
 
 ### CORS
 ```
@@ -187,7 +187,7 @@ Assymetric Key Encryption
       1. user credentials
       2. user data (payload)
       3. RSA key pair
-2. Send JWT as poart of request header
+2. Send JWT as part of request header
    1. Authorization Header
    2. Bearer Token
 3. JWT is verified
@@ -210,7 +210,7 @@ Assymetric Key Encryption
    1. return new NimbusJwtEncoder(jwkSource());
 
 
-see file: com.droveda.springsecuritylab.config.JwtSecurityConfiguration  
+see file: ```com.droveda.springsecuritylab.config.JwtSecurityConfiguration```    
 
 
 ### Understanding Spring Security Authentication
@@ -232,7 +232,7 @@ see file: com.droveda.springsecuritylab.config.JwtSecurityConfiguration
       1. hasRole, hasAuthority, hasAnyAuthority, isAuthenticated
 2. Method Security (@EnableMethodSecurity)
    1. **@Pre** and **@Post** Annotations
-      1. @PreAuthorize("hadTole('USER') and #username == authentication.name")
+      1. @PreAuthorize("hasRole('USER') and #username == authentication.name")
       2. @PostAuthorize("returnObject.username == 'in29minutes'")
    2. JSR-250 annotations
       1. @EnableMethodSecurity(jsr250Enabled=true)

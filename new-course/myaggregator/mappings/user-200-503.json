@@ -1,0 +1,12 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "/my-service/users/200"
+  },
+  "response": {
+    "status": 503,
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  }
+}

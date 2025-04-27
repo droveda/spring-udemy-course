@@ -1,0 +1,17 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "/my-service/users/123"
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "jsonBody": {
+      "name": "Robert",
+      "email": "robert@email.com",
+      "birthDate": "1980-12-24"
+    }
+  }
+}

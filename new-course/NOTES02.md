@@ -1,14 +1,14 @@
 # Understanding Spring Boot vs Spring MVC vc Spring
 
 * Spring Framework
-  * Dependency INjection
-  * @Component, @Autowired, ComponentScan, etc...
+  * Dependency Injection
+  * @Component, @Autowired, @ComponentScan, etc...
   * Just Dependency Injection is NOT sufficient (You need other frameworks to build apps)
     * Spring Modules and Spring Projects: Extend Spring Eco System
       * Provide good integration with other frameworks (Hibernate/JPA, JUnit & Mockito for Unit Testing)
 * Spring MVC (Spring Module): Simplify bulding web apps and REST API
   * Bulding web applications with struts was very complex
-  * @Controller, @ResrController, @RequestMapping(/courses)
+  * @Controller, @RestController, @RequestMapping("/courses")
 * Spring Boot (Spring Project): Build PRODUCTION-READ apps QUICKLY
   * Starter projects
   * Auto Configuration
@@ -80,10 +80,10 @@ Spring Boot 3.1.X and lower
 
 ```
 
-### REST API ociumentation - Seagger and Open API
+### REST API documentation - Swagger and Open API
 * 2011 - Swagger Specification and Swagger Tools were introduced
 * 2016 - Open API Specification created based on Swagger Spec.
-  * Seagger Tools (ex: Swagger UI) continue to exist
+  * Swagger Tools (ex: Swagger UI) continue to exist
 * **OpenAPI Specification**: Standard, language-agnostic interface
   * Discover and understand REST API
   * Earlier called Swagger Specification
@@ -172,16 +172,18 @@ Hypermedia as the Engine of Application State (HATEOAS)
 
 
 ## Mysql With docker
-docker run --detach --env MYSQL_ROOT_PASSWORD=dummypassword --env MYSQL_USER=social-media-user --env MYSQL_PASSWORD=dummypassword --env MYSQL_DATABASE=social-media-database --name mysql --publish 3306:3306 mysql:8-oracle  
+```docker run --detach --env MYSQL_ROOT_PASSWORD=dummypassword --env MYSQL_USER=social-media-user --env MYSQL_PASSWORD=dummypassword --env MYSQL_DATABASE=social-media-database --name mysql --publish 3306:3306 mysql:8-oracle```  
 
 #### Mysql Commands
+```
 mysqlsh  
 \connect social-media-user@localhost:3306  
 \sql  
 use social-media-database  
 select * from user_details;  
 select * from post;  
-\quit  
+\quit
+```  
 
 
 ```
