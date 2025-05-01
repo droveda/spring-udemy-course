@@ -1,9 +1,40 @@
 spring:
   application:
     name: myaggregator
+  cloud:
+    openfeign:
+      client:
+        config:
+          default:
+            connectTimeout: 2000
+            readTimeout: 3000
+      httpclient:
+        hc5:
+          enabled: true
+          socketTimeout: 5 # Default value for socket timeout.
+          connectionRequestTimeout: 3 # Default value for connection request timeout.
+          connectionRequestTimeoutUnit: SECONDS # Value for connection request timeout unit.
+        maxConnections: 200 # Default value for max number od connections
+        maxConnectionsPerRoute: 50 # Default value for max number od connections per route
+        timeToLive: 900 # Default value for time to live
+        connectionTimeout: 2000 # Default value for connection timeout
+        connectionTimerRepeat: 3000 # Default value for connection timer repeat
+
 
 server:
   port: 8081
 
 users-service:
   url: http://localhost:8082/my-service
+
+logging:
+  level:
+    root: INFO
+    com:
+      example:
+        myaggregator: INFO
+    org:
+      springframework:
+        boot: INFO
+#        cloud:
+#          openfeign: DEBUG

@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
-import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -23,7 +22,9 @@ public class UserController {
 
     @GetMapping
     public ResponseEntity<List<UserDTO>> listUsers() {
-        return ResponseEntity.ok(List.of(new UserDTO(1, "John Doe", "john.doe@company.com", LocalDate.now())));
+        return ResponseEntity.ok(
+                userService.getUsers()
+        );
     }
 
     @GetMapping("/{id}")

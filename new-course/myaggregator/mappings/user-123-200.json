@@ -9,6 +9,7 @@
       "Content-Type": "application/json"
     },
     "jsonBody": {
+      "id": 123,
       "name": "Robert",
       "email": "robert@email.com",
       "birthDate": "1980-12-24"
