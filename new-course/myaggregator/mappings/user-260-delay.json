@@ -1,0 +1,19 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "/my-service/users/260"
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "jsonBody": {
+      "id": 260,
+      "name": "User with delay 2",
+      "email": "user-delay2@email.com",
+      "birthDate": "1990-01-07"
+    },
+    "fixedDelayMilliseconds": 2000
+  }
+}
