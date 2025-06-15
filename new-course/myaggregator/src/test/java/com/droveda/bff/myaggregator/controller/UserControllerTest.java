@@ -1,5 +1,6 @@
 package com.droveda.bff.myaggregator.controller;
 
+import com.droveda.bff.myaggregator.configuration.TokenInterceptorConfig;
 import com.droveda.bff.myaggregator.dto.UserDTO;
 import com.droveda.bff.myaggregator.exception.UserNotFoundException;
 import com.droveda.bff.myaggregator.service.UserService;
@@ -8,6 +9,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.FilterType;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -20,7 +23,11 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@WebMvcTest(UserController.class)
+@WebMvcTest(value = UserController.class,
+        includeFilters = {@ComponentScan.Filter(
+                type = FilterType.ASSIGNABLE_TYPE,
+                classes = TokenInterceptorConfig.class
+        )})
 public class UserControllerTest {
 
     @Autowired
