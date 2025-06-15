@@ -10,7 +10,7 @@ JavaScript is implementation
   * node --version
   * node -v
   * npm -v
-  * npm --versiobn
+  * npm --version
 
 
 ## npm
@@ -51,7 +51,7 @@ https://create-react-app.dev/docs/getting-started/
 ### React Folder Structure
 * package.json -> dependencies
 * node_modules -> Folder where all the dependencies are downloaded to
-* public/indexhtml -> Contains root dev
+* public/index.html -> Contains root dev
 * src/index.js -> initializes React App. Loads app component
 * src/App.js -> Code for App Component
   * src/App.css -> Styling for App component
@@ -78,7 +78,7 @@ https://create-react-app.dev/docs/getting-started/
   * **useState** hook allows adding state to Function Components
     * **useState** returns two things
       * 1: Current State
-      * 2: A fucntion to update state
+      * 2: A function to update state
   * Each instance of component has it's own state
   * How to share state between components?
     * Move state "upwards" (to a parent component)

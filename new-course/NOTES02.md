@@ -4,7 +4,7 @@
   * Dependency Injection
   * @Component, @Autowired, @ComponentScan, etc...
   * Just Dependency Injection is NOT sufficient (You need other frameworks to build apps)
-    * Spring Modules and Spring Projects: Extend Spring Eco System
+    * Spring Modules and Spring Projects: Extends Spring Eco System
       * Provide good integration with other frameworks (Hibernate/JPA, JUnit & Mockito for Unit Testing)
 * Spring MVC (Spring Module): Simplify bulding web apps and REST API
   * Bulding web applications with struts was very complex
@@ -136,7 +136,7 @@ http://localhost:8080/swagger-ui/index.html
 
 * Factors to consider
   * URI Pollution
-  * Misuse of HTTP Headers
+  * Missuse of HTTP Headers
   * Caching
   * Can we execute the request on the browser?
   * API documentation
@@ -169,6 +169,19 @@ Hypermedia as the Engine of Application State (HATEOAS)
   * metrics - Application metrics
   * mappings - Details around Request Mappings
   * and a lot more...
+
+```
+http://localhost:8081/actuator/metrics/application.ready.time
+http://localhost:8081/actuator/health
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+management.endpoints.web.exposure.include=health,metrics
+```
 
 
 ## Mysql With docker

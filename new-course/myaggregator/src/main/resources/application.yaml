@@ -37,3 +37,9 @@ logging:
         boot: INFO
 #        cloud:
 #          openfeign: DEBUG
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"

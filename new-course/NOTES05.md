@@ -29,7 +29,7 @@ BUT is provides a very flexible security system!
 * A chain of filters ensure proper authentication and authorization
 
 Request -> Dispatcher Servltet -> Controller(s)  
-Reques -> Spring Security -> Dispather Servlet -> Controller(s)  
+Request -> Spring Security -> Dispather Servlet -> Controller(s)  
 * Spring security intercepts all requests
 * Follows following security principle
   * Have complete mediation
@@ -163,7 +163,7 @@ NOTE: Difference between encoding, hashing and Encryption
   * BCryptPasswordEncoder
 
 ### Getting Started With JWT
-* Open indeustry standard for representing claims securely between two parties
+* Open industry standard for representing claims securely between two parties
 * Can Contain User Details and Autorizations
 * Structure:
   * header
@@ -192,7 +192,7 @@ Assymetric Key Encryption
    2. Bearer Token
 3. JWT is verified
    1. Needs Decoding
-   2. RSA key pair (PUblic Key)
+   2. RSA key pair (Public Key)
 
 
 ### JWT Authentication using Spring boot's Oauth2 Resource Server
@@ -226,7 +226,7 @@ see file: ```com.droveda.springsecuritylab.config.JwtSecurityConfiguration```
     * GrantedAuthority - An authority granted to principal (roles, scopes, ...)
 
 
-### Spting Security Authorization
+### Spring Security Authorization
 1. Global Security: authorizeHttpRequests
    1. .requestMatchers("/users").hasRole("USER")
       1. hasRole, hasAuthority, hasAnyAuthority, isAuthenticated

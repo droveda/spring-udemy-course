@@ -15,10 +15,10 @@ var game = new MarioGame();
     * A computer, on the other hand, is a little bit more difficult to move
   * Coupling is even more important in building great software
     * Business requirements change
-    * Frameworks changeCode changes
+    * Frameworks changes
   * We want Loose Coupling as much as possible
   * We cant to make funcional changes with as less code changes as possible
-* Java Interfaces and Spring Framewotk help with Loose Coupling!
+* Java Interfaces and Spring Framework help with Loose Coupling!
 
 
 ## Simple Spring App
