@@ -1,5 +1,16 @@
 # Spring Security
 
+* Security Principles
+* Authentication
+* Authorization
+* Spring Security Fundamentals
+* Spring Security Filter Chain
+* Form Authentication
+* Basic Authentication
+* JWT Authentication
+* CSRF, CORS,...
+* OAuth
+
 ## Authentication and Authorization
 * Authentication, what do you remember + what you possess
   * userid/password  
@@ -19,7 +30,7 @@ Principles of secure systems
 * Ensure Openness of Design
 
 Spring Security can be difficult to get started  
-* Filter Chain
+* Filter Chain (Spring Security Filter Chain)
 * Authentication Managers
 * Authentication providers
 * ...
@@ -27,6 +38,15 @@ Spring Security can be difficult to get started
 BUT is provides a very flexible security system!  
 * By default, everything is protected!
 * A chain of filters ensure proper authentication and authorization
+
+String Security Filter Chain:  
+* ...
+* CsrfFilter
+* LogoutFilter
+* DefaultLoginPageGeneratingFilter
+* BasicAuthenticationFilter
+* ExceptionTranslationFilter
+* AuthorizationFilter
 
 Request -> Dispatcher Servltet -> Controller(s)  
 Request -> Spring Security -> Dispather Servlet -> Controller(s)  
@@ -47,9 +67,29 @@ Request -> Spring Security -> Dispather Servlet -> Controller(s)
 * **Z-Frame-Options** is set to 0 (Frames are disabled)
 * And a lot of others...
 
+### How does Spring Security Work?
+* Spring Security executes a series of filters
+  * Filter provide these features:
+    * **Authentication**: Is it a valid user (Ex: BasicAuthenticationFilter)
+    * **Authorization**: Does the user have right access? (Ex: AuthorizationFilter)
+    * Other Features:
+      * Cross-Origin Resource Sharing (CORS) - CorsFilter
+        * Should you allow AJAX calls from other domains?
+      * Cross Site Request Forgery (CSRF) - CsrFilter
+        * A malicious website making use of previous authentication on your website
+        * Default: CSRF protection enabled for update requests - POST, PUT, etc...
+      * Login Page, Logout Page
+        * LogoutFilter, DefaultLoginPageGeneratinFilter, DefaultLogoutPageGeneratingFilter
+      * Translating exceptions into proper Http Responses (ExceptionTranslationFilter)
+  * **Order of filters** is important (typical order shown below)
+   1. Basic Check Filters - CORS, CSRF, ...
+   2. Authentication Filters
+   3. Authorization Filters 
+
 ### Form Based Authentication
 * Used by most web applications
 * Uses a Session Cookie JSESSIONID
+* Spring Security Enables Form Based Authentication by default
 * It is enabled by default
   * Provides a default Login Page
   * Provides a default Logout Page
@@ -71,18 +111,36 @@ Request -> Spring Security -> Dispather Servlet -> Controller(s)
 2. You go to a malicious website without logging out
 3. Malicious website executes a bank transfer without your knowledge using Cookie-A
 
+```
+import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.security.web.csrf.CsrfToken;
+
+@RestController
+public class SpringSecurityController {
+
+    @GetMapping("/csrf-token")
+    public CsrfToken csrfToken(HttpServletRequest request) {
+        return (CsrfToken) request.getAttribute("_csrf");
+    }
+
+}
+```
+
 How can you protect from CSRF?  
-* Syncronizer token pattern
+* **Syncronizer token pattern**
   * A token created for each request
-  * To make an update (POST, PUT, ...) you need a CSRF token from the previous request
-    * To make a request you need to inform the CSRF token in the header - X-CSRF-TOKEN
+  * To make an update (POST, PUT, ...) you need a CSRF token from the **previous request**
+    * To make a request you need to inform the CSRF token in the header 
+      * Header Name = **X-CSRF-TOKEN**
+  * NOTE: CSRF might not be applicable if there is no session involved, if your REST API is stateless
 * SameSite cookie (Set-Cookie: SameSite=Strict)
   * application.properties
     * server.servlet.session.cookie.same-site=strict
 * NOTE: If your REST API is stateless CSRF token is not applicable
 
 ```org.springframework.boot.autoconfigure.security.servlet.SpringBootWebSecurityConfiguration```    
-the class above is the default config applied   
+the class above is the default config applied it can be found if you search for SpringBootWebSecurityConfiguration using shift+shift hotkey in Intellij.  
+It is inside -> **org.springframework.book:spring-boot-autoconfigure:3.4.4** for instance.  
 
 ### CORS
 ```
@@ -101,7 +159,9 @@ public WebMvcConfigurer corsConfigurer() {
 * Cross-Origin Resource Sharing (CORS): Specification that allows you to configure which cross-domain requests are allowed
   * Global configuration
     * Configure addCorsMappings callback method in WebMvcConfigurer
+    * It will configure for all the Controllers
   * Local Configuration
+    * Can have different settings for each Controller
     * @CrossOrigin - Allow from all origins
     * @CrossOrigin(origins = "http://localhost:3000")
 
@@ -152,6 +212,19 @@ public UserDetailsService userDetailsService(DataSource dataSource) {
 
 ### Storing Passwords
 NOTE: Difference between encoding, hashing and Encryption   
+
+#### Encoding
+* Transform data - one form to another
+  * Does NOT use a key or password
+  * Is reversible
+  * Typically NOT used for securing data
+  * Usecases: Compression, Streaming
+  * Example: Base64, Wav, MP3
+
+#### Hashing 
+* One-wat process
+* NOT reversible
+* validate integrity of data, store passwords
 * Hashes like SHA-256 are no longer secure
 * Modern systems can perform billions of hash calculations a second
   * AND systems improve with time!
@@ -161,6 +234,11 @@ NOTE: Difference between encoding, hashing and Encryption
 * PasswordEncoder - interface for performing one way transformation of a password
   * (REMEMBER) Confusingly Named!
   * BCryptPasswordEncoder
+
+#### Encryption
+* Encoding data using a key or password
+* Is reversible, you need key or password to decrypt
+* Example: RSA
 
 ### Getting Started With JWT
 * Open industry standard for representing claims securely between two parties
@@ -180,10 +258,10 @@ NOTE: Difference between encoding, hashing and Encryption
     * Includes a secret
 
 Symmetric Encryption  
-Assymetric Key Encryption  
+Asymmetric Key Encryption  
 
 1. Create a JWT
-   1. needs
+   1. Needs Encoding
       1. user credentials
       2. user data (payload)
       3. RSA key pair
@@ -212,11 +290,24 @@ Assymetric Key Encryption
 
 see file: ```com.droveda.springsecuritylab.config.JwtSecurityConfiguration```    
 
+```
+<dependency>
+  <groupId>org.springframework.boot</groupId>
+  <artifactId>spring-boot-starter-oauth2-resource-server</artifactId>
+</dependency>
+```
+
 
 ### Understanding Spring Security Authentication
 * Authentication is done as part of the Spring Security Filter Chain!
 * **1 AuthenticationManager** - Responsible for authentication
   * Can interact with multiple authentication providers
+  * SecurityContextHolder
+    * SecurityContext
+      * Authentication
+      * 1. Principal -> (Details about the user)
+      * 2. Credentials -> (Username and password)
+      * 3. Authorities -> (What roles the principal has)
 * **2 Authentication Provider** - Perform specific authentication type
   * JWTAuthenticationProvider - JWT Authentication
 * **3 UserDetailsService** - Core interface to load user data
@@ -243,10 +334,10 @@ see file: ```com.droveda.springsecuritylab.config.JwtSecurityConfiguration```
 
 
 ### Oauth
-* Resource owner
-* Client application
-* Resource Server
-* Authorization Server
+* Resource owner (You - person owing the google drive files)
+* Client application (Todo management application)
+* Resource Server (Google Drive)
+* Authorization Server (Google oauth server)
 
 ```
 ##Google API console
