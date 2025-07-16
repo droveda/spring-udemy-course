@@ -1,4 +1,4 @@
-# Understanding Spring Boot vs Spring MVC vc Spring
+# Understanding Spring Boot vs Spring MVC vs Spring
 
 * Spring Framework
   * Dependency Injection

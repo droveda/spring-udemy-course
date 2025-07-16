@@ -6,7 +6,7 @@
     * business layer
     * Data layer
 * Each layer has differente responsibilites
-  * howerver there are a few common aspacts that apply to all layers
+  * howerver there are a few common aspects that apply to all layers
     * Security
     * Performance
     * Logging
